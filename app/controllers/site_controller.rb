@@ -1,8 +1,5 @@
 class SitesController < ApplicationController
-  def public_recipes
-    
-  end
+  def public_recipes; end
 
-  def shopping_list
-  end
+  def shopping_list; end
 end

@@ -46,3 +46,25 @@ header {
   display: flex;
   list-style-type: none;
 }
+
+/* tables styling */
+
+#table {
+  border: 1px solid #b3adad;
+  border-collapse: collapse;
+  padding: 0.5rem;
+}
+
+#table th {
+  border: 1px solid #b3adad;
+  padding: 0.5rem;
+  background: #f0f0f0;
+  color: #313030;
+}
+
+#table td {
+  border: 1px solid #b3adad;
+  padding: 0.5rem;
+  background: #ffff;
+  color: #313030;
+}

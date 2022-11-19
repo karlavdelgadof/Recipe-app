@@ -8,7 +8,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
-    @recipe = set_recipe 
+    @recipe = set_recipe
     @foods = Food.all
     @recipe_food = RecipeFood.new
     @recipe_foods = RecipeFood.where(recipe_id: @recipe.id)

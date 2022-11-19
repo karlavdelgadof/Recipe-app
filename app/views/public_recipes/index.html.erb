@@ -2,14 +2,21 @@
 
 <h1>Public Recipes</h1>
 
-<div id="recipes">
+<ul id="recipes">
   <% @public_recipes.each do |recipe| %>
-    <%= render recipe %>
-    <p>
-      <%= link_to "Show this recipe", recipe %>
-    </p>
+    <%= link_to recipe_path(recipe.id) do%>
+      <li>
+        <div>
+          <h2><%= recipe.name %></h2>
+          <span><%= recipe.user.name %></span>
+          <%= button_to "Remove", recipe, method: :delete %>
+        </div>
+        <span>Total food items: <%= recipe.foods.length %></span>
+        <span>Total price: <%= @prices.sum %></span>
+      </li>
+    <% end %>
   <% end %>
-</div>
+</ul>
 
 <%= link_to "New recipe", new_recipe_path %>
 

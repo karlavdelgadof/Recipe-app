@@ -6,16 +6,10 @@ class FoodsController < ApplicationController
     @foods = Food.all
   end
 
-  # GET /foods/1 or /foods/1.json
-  def show; end
-
   # GET /foods/new
   def new
     @food = Food.new
   end
-
-  # GET /foods/1/edit
-  def edit; end
 
   # POST /foods or /foods.json
   def create
@@ -23,7 +17,7 @@ class FoodsController < ApplicationController
 
     respond_to do |format|
       if @food.save
-        format.html { redirect_to food_url(@food), notice: 'Food was successfully created.' }
+        format.html { redirect_to foods_url, notice: 'Food was successfully created.' }
         format.json { render :show, status: :created, location: @food }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,6 +41,7 @@ class FoodsController < ApplicationController
 
   # DELETE /foods/1 or /foods/1.json
   def destroy
+    @food = set_food
     @food.destroy
 
     respond_to do |format|

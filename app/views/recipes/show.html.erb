@@ -1,10 +1,102 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @recipe %>
+<main>
+  <h1><%= @recipe.name %></h1>
+  <div class="recipe-details">
+    <p>
+      <strong>Preparation time:</strong>
+      <%= @recipe.prep_time %>
+    </p>
+
+    <p>
+      <strong>Cooking time:</strong>
+      <%= @recipe.cooking_time %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @recipe.description %>
+    </p>
+
+    <div class="public-switch">
+      <p>
+        <strong>Public:</strong>
+        <%= @recipe.public %>
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <button>Generate Shopping List</button>
+    <button>Add ingredient</button>
+  </div>
+
+
+  <table id="table">
+    <thead>
+		  <tr>
+			  <th>Food</th>
+			  <th>Quantity</th>
+			  <th>Value</th>
+			  <th>Actions</th>
+		  </tr>
+	  </thead>
+    <tbody>
+      <% @recipe_foods.each do |food| %>
+        <tr>
+          <td>
+            <%= food.food.name %>
+          </td>
+
+          <td>
+            <span><%= food.quantity %> <%= food.food.measurement_unit%></span>
+          </td>
+
+          <td>
+            <span>$ <%= food.quantity * food.food.price %></span>
+          </td>
+
+          <td>
+            <%= button_to "Remove", food, :method => :delete %>
+            <%= button_to "Modify", food, :method => :edit %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_with(model: @recipe_food) do |form| %>
+    <% if @recipe_food.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@recipe_food.errors.count, "error") %> prohibited this @recipe_food from being saved:</h2>
+  
+        <ul>
+          <% @recipe_food.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <%= form.label "Choose an Ingredient" %>
+      <%= form.collection_select :food_id, Food.all, :id, :name %>
+      <%= form.hidden_field :recipe_id, value: @recipe.id %>
+    </div>
+  
+    <div>
+      <%= form.label :quantity, style: "display: block" %>
+      <%= form.number_field :quantity,  step: :any%>
+    </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %> 
+</main>
 
 <div>
-  <%= link_to "Edit this recipe", edit_recipe_path(@recipe) %> |
   <%= link_to "Back to recipes", recipes_path %>
-
-  <%= button_to "Destroy this recipe", @recipe, method: :delete %>
+  <%= button_to "Remove", @recipe, method: :delete %>
 </div>

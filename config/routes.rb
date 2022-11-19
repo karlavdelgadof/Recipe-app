@@ -4,11 +4,10 @@ Rails.application.routes.draw do
   resources :recipe_foods
   resources :inventory_foods
   resources :inventories
-  resources :recipes
+  resources :recipes, only: [:index, :new, :create, :show, :destroy]
   resources :foods
-  resources :users
-  # get "/public_recipes" to: "/views/layouts/public_recipes"
-  # resources :shopping_list
+  resources :public_recipes, only: [:index]
+  resources :shopping_lists, only: [:index, :show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

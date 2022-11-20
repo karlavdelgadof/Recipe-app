@@ -1,0 +1,16 @@
+#recipes,
+#inventories {
+  display: flex;
+  flex-wrap: wrap;
+  width: 75%;
+  list-style-type: none;
+  gap: 1.2rem;
+}
+
+.recipe,
+.inventory {
+  padding: 1.3rem;
+  background-color: var(--color-two);
+  box-shadow: 0 15px 5px -4px rgba(149, 149, 149, 0.34);
+  border-radius: 42px;
+}

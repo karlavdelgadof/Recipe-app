@@ -1,0 +1,22 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Public Recipes</h1>
+
+<ul id="recipes">
+  <% @public_recipes.each do |recipe| %>
+    <%= link_to recipe_path(recipe.id) do%>
+      <li>
+        <div>
+          <h2><%= recipe.name %></h2>
+          <span><%= recipe.user.name %></span>
+          <%= button_to "Remove", recipe, method: :delete %>
+        </div>
+        <span>Total food items: <%= recipe.foods.length %></span>
+        <span>Total price: <%= @prices.sum %></span>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "New recipe", new_recipe_path %>
+

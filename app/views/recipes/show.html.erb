@@ -1,0 +1,132 @@
+<p style="color: green"><%= notice %></p>
+
+<main>
+  <h1><%= @recipe.name %></h1>
+  <div class="recipe-details">
+    <p>
+      <strong>Preparation time:</strong>
+      <%= @recipe.prep_time %>
+    </p>
+
+    <p>
+      <strong>Cooking time:</strong>
+      <%= @recipe.cooking_time %>
+    </p>
+
+    <p>
+      <strong>Description:</strong>
+      <%= @recipe.description %>
+    </p>
+
+    <div class="public-switch">
+      <p>
+        <strong>Public:</strong>
+        <%= @recipe.public %>
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <button id="modal_btn" class="btn btn-primary generate-shopping-list-btn">Generate shopping list</button>
+    <button>Add ingredient</button>
+  </div>
+
+
+  <table id="table">
+    <thead>
+		  <tr>
+			  <th>Food</th>
+			  <th>Quantity</th>
+			  <th>Value</th>
+			  <th>Actions</th>
+		  </tr>
+	  </thead>
+    <tbody>
+      <% @recipe_foods.each do |food| %>
+        <tr>
+          <td>
+            <%= food.food.name %>
+          </td>
+
+          <td>
+            <span><%= food.quantity %> <%= food.food.measurement_unit%></span>
+          </td>
+
+          <td>
+            <span>$ <%= food.quantity * food.food.price %></span>
+          </td>
+
+          <td>
+            <%= button_to "Remove", food, :method => :delete %>
+            <%= button_to "Modify", food, :method => :edit %>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= form_with(model: @recipe_food) do |form| %>
+    <% if @recipe_food.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@recipe_food.errors.count, "error") %> prohibited this @recipe_food from being saved:</h2>
+  
+        <ul>
+          <% @recipe_food.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+    <div>
+      <%= form.label "Choose an Ingredient" %>
+      <%= form.collection_select :food_id, Food.all, :id, :name %>
+      <%= form.hidden_field :recipe_id, value: @recipe.id %>
+    </div>
+  
+    <div>
+      <%= form.label :quantity, style: "display: block" %>
+      <%= form.number_field :quantity,  step: :any%>
+    </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %> 
+
+
+  <div class="generate-shopping-list-container">
+    <button id="close" class="close-btn">&times;</button>
+    <h5 class="modal-title">Generate Shopping List</h5>
+
+
+    <%=form_with url: shopping_lists_path, method: :get do |f| %>
+      <div>
+        <div>
+          <%= f.select :inventory_id, Inventory.all.collect { |inventory| [inventory.name, inventory.id] }, :prompt => 'Select an Inventory', class: 'focus:outline-none', required: true %>
+        </div>
+        <%= f.hidden_field :recipe_id, value: @recipe.id, required: true %>
+      </div>
+      <div>
+        <%= f.submit "Generate", class:"btn btn-primary text-black" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to "Back to recipes", recipes_path %>
+    <%= button_to "Remove", @recipe, method: :delete %>
+  </div>
+
+</main>
+
+<script>
+    const shopping_list_btn = document.querySelector(".generate-shopping-list-btn");
+    const generate_shopping_list_container = document.querySelector(".generate-shopping-list-container");
+    const close_btn = document.querySelector(".close-btn");
+    shopping_list_btn.addEventListener("click", () => {generate_shopping_list_container.style.top = "25%";})
+    close_btn.addEventListener("click", () => {generate_shopping_list_container.style.top = "-100%";})
+</script>
+
+

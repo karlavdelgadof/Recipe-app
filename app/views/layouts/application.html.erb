@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Off the Cook</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('favicon-32x32.png') %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags :defaults%>
+  </head>
+
+  <body>
+    <% if user_signed_in?%>
+      <%= render "shared/navbar" %>
+    <% else %>
+      <%= render "shared/header" %>
+    <% end %>
+    
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+    <%= render "shared/footer" %>
+  </body>
+</html>

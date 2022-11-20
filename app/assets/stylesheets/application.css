@@ -1,0 +1,97 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background-color: var(--color-two);
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-one);
+  background-image: url("https://www.transparenttextures.com/patterns/cream-dust.png");
+}
+
+header {
+  display: flex;
+  width: 100%;
+  padding: 1.5rem 0;
+  justify-content: center;
+  background-color: var(--color-one);
+  box-shadow: 1px 2px 10px rgb(39 42 50);
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.generate-shopping-list-container {
+  background-color: rgba(150, 150, 150, 0.7);
+  top: -100%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  z-index: 2;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+#navbar {
+  padding-bottom: 0.5rem;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar ul {
+  display: flex;
+  list-style-type: none;
+  gap: 0.8rem;
+}
+
+/* tables styling */
+
+#table {
+  border: 1px solid #b3adad;
+  border-collapse: collapse;
+  padding: 0.5rem;
+  border-radius: 1em;
+  overflow: hidden;
+}
+
+#table th {
+  border: 1px solid #b3adad;
+  padding: 0.5rem;
+  background: var(--color-three);
+  color: #313030;
+}
+
+#table td {
+  border: 1px solid #b3adad;
+  padding: 0.5rem;
+  background: #ffff;
+  color: #313030;
+}

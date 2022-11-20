@@ -37,6 +37,17 @@ header {
   justify-content: center;
 }
 
+.generate-shopping-list-container {
+  background-color:rgba(150,150,150, 0.7);
+  top: -100%;
+  left:25%;
+  width:50vw;
+  height:50vh;
+  z-index:2;
+  position:absolute;
+  box-sizing: border-box;
+}
+
 #navbar {
   padding-bottom: 0.5rem;
   width: 80%;
@@ -68,3 +79,4 @@ header {
   background: #ffff;
   color: #313030;
 }
+

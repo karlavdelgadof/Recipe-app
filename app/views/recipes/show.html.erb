@@ -27,7 +27,7 @@
   </div>
 
   <div>
-    <button>Generate Shopping List</button>
+    <button id="modal_btn" class="btn btn-primary generate-shopping-list-btn">Generate shopping list</button>
     <button>Add ingredient</button>
   </div>
 
@@ -96,18 +96,37 @@
   <% end %> 
 
 
-    <div>
-      <%= select_tag(:inventory_id, options_from_collection_for_select(@inventories, 'id', 'name'))%>
-    </div>
-  
-    <div>
-      <%= link_to "Generate", shopping_list_path(@recipe.id, params[:inventory_id]) %>
-    </div>
+  <div class="generate-shopping-list-container">
+    <button id="close" class="close-btn">&times;</button>
+    <h5 class="modal-title">Generate Shopping List</h5>
+
+
+    <%=form_with url: shopping_lists_path, method: :get do |f| %>
+      <div>
+        <div>
+          <%= f.select :inventory_id, Inventory.all.collect { |inventory| [inventory.name, inventory.id] }, :prompt => 'Select an Inventory', class: 'focus:outline-none', required: true %>
+        </div>
+        <%= f.hidden_field :recipe_id, value: @recipe.id, required: true %>
+      </div>
+      <div>
+        <%= f.submit "Generate", class:"btn btn-primary text-black" %>
+      </div>
+    <% end %>
+  </div>
 
   <div>
     <%= link_to "Back to recipes", recipes_path %>
     <%= button_to "Remove", @recipe, method: :delete %>
   </div>
+
 </main>
+
+<script>
+    const shopping_list_btn = document.querySelector(".generate-shopping-list-btn");
+    const generate_shopping_list_container = document.querySelector(".generate-shopping-list-container");
+    const close_btn = document.querySelector(".close-btn");
+    shopping_list_btn.addEventListener("click", () => {generate_shopping_list_container.style.top = "25%";})
+    close_btn.addEventListener("click", () => {generate_shopping_list_container.style.top = "-100%";})
+</script>
 
 

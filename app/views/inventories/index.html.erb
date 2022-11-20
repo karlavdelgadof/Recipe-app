@@ -2,13 +2,20 @@
 
 <h1>Inventories</h1>
 
-<div id="inventories">
-  <% @inventories.each do |inventory| %>
-    <%= render inventory %>
-    <p>
-      <%= link_to "Show this inventory", inventory %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New inventory", new_inventory_path %>
+
+<ul id="inventories">
+  <% @inventories.each do |inventory| %>
+    <%= link_to inventory do%>
+      <li class="inventory">
+        <div>
+          <h2><%= inventory.name %></h2>
+          <%= button_to "Remove", inventory, method: :delete %>
+        </div>
+        <p>Cras dapibus egestas tellus non luctus. Nulla tempus interdum fermentum. Sed fringilla enim odio, sed feugiat lacus rhoncus vel. In interdum faucibus interdum. Suspendisse dolor sem, sodales in dapibus a, dictum ullamcorper lectus. Aenean placerat arcu lacus, a mattis sapien sodales pellentesque. In efficitur suscipit metus sit amet dapibus. Morbi vitae ante nisl.</p>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+

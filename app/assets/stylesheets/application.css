@@ -28,6 +28,7 @@ body {
   justify-content: space-between;
   align-items: center;
   font-family: var(--font-one);
+  background-image: url("https://www.transparenttextures.com/patterns/cream-dust.png");
 }
 
 header {
@@ -35,16 +36,40 @@ header {
   width: 100%;
   padding: 1.5rem 0;
   justify-content: center;
+  background-color: var(--color-one);
+  box-shadow: 1px 2px 10px rgb(39 42 50);
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+.generate-shopping-list-container {
+  background-color: rgba(150, 150, 150, 0.7);
+  top: -100%;
+  left: 25%;
+  width: 50vw;
+  height: 50vh;
+  z-index: 2;
+  position: absolute;
+  box-sizing: border-box;
 }
 
 #navbar {
   padding-bottom: 0.5rem;
   width: 80%;
+  display: flex;
+  justify-content: space-between;
 }
 
 #navbar ul {
   display: flex;
   list-style-type: none;
+  gap: 0.8rem;
 }
 
 /* tables styling */
@@ -53,12 +78,14 @@ header {
   border: 1px solid #b3adad;
   border-collapse: collapse;
   padding: 0.5rem;
+  border-radius: 1em;
+  overflow: hidden;
 }
 
 #table th {
   border: 1px solid #b3adad;
   padding: 0.5rem;
-  background: #f0f0f0;
+  background: var(--color-three);
   color: #313030;
 }
 
@@ -68,3 +95,4 @@ header {
   background: #ffff;
   color: #313030;
 }
+

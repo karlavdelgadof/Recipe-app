@@ -40,7 +40,7 @@ class RecipeFoodsController < ApplicationController
     @recipe_food.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipe_foods_url, notice: 'Recipe food was successfully destroyed.' }
+      format.html { redirect_to recipe_url(@recipe_food.recipe), notice: 'Recipe food was successfully destroyed.' }
     end
   end
 

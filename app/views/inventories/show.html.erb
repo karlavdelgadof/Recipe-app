@@ -1,10 +1,64 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @inventory %>
+<%= link_to "Add food", new_food_path %>
+
+<%= form_with(model: @inventory_food) do |form| %>
+  <% if @inventory_food.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@inventory_food.errors.count, "error") %> prohibited this @inventory_food from being saved:</h2>
+
+      <ul>
+        <% @inventory_food.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label "Choose a Food" %>
+    <%= form.collection_select :food_id, @foods, :id, :name %>
+    <%= form.hidden_field :inventory_id, value: @inventory.id %>
+  </div>
+
+  <div>
+    <%= form.label :quantity, style: "display: block" %>
+    <%= form.number_field :quantity,  step: :any%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %> 
+
+<table id="table">
+  <thead>
+		<tr>
+			<th>Food</th>
+			<th>Quantity</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+  <tbody>
+  <% @inventory_foods.each do |food| %>
+    <tr>
+      <td>
+        <%= Food.find_by(id: food.food_id).name %>
+      </td>
+
+      <td>
+        <span><%= food.quantity.round(2) %> <%= Food.find_by(id: food.food_id).measurement_unit %></span>
+      </td>
+
+      <td>
+        <%= button_to "Remove", food, :method => :delete %>
+      </td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
 
 <div>
-  <%= link_to "Edit this inventory", edit_inventory_path(@inventory) %> |
-  <%= link_to "Back to inventories", inventories_path %>
-
   <%= button_to "Destroy this inventory", @inventory, method: :delete %>
 </div>

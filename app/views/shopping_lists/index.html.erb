@@ -1,2 +1,41 @@
-<h1>ShoppingLists#index</h1>
-<p>Find me in app/views/shopping_lists/index.html.erb</p>
+<h1>Shopping List</h1>
+
+  <p>
+    <span>Amount of food items to buy: </span>
+    <span>&nbsp;<%= @shopping_list.length %></span>
+  </p>
+
+  <p>
+    <span>Total value of food needed:</span>
+    <span>$ <%= @total.sum %></span>
+  </p>
+
+  <p>
+    <span>Recipe: </span>
+    <span>&nbsp;<%= Recipe.find(params[:recipe_id]).name %></span>
+  </p>
+
+  <p>
+    <span>Inventory:</span>
+    <span>&nbsp;<%= Inventory.find(params[:inventory_id]).name %></span>
+  </p>
+
+  <table id="table">
+    <thead>
+		  <tr>
+			  <th>Food</th>
+			  <th>Quantity</th>
+			  <th>Price</th>
+		  </tr>
+	  </thead>
+    <tbody>
+      <% @shopping_list.each do |food| %>
+        <tr>
+          <td><%= food[:name] %></td>
+          <td><%= food[:quantity] %></td>
+          <td><%= food[:value] %></td>
+          <td><%= button_to "Delete", food_path(food[:id]), data: {turbo_method: :delete, turbo_confirm: 'are you sure'}, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

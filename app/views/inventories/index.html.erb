@@ -7,7 +7,7 @@
 <ul id="inventories">
   <% @inventories.each do |inventory| %>
     <%= link_to inventory do%>
-      <li>
+      <li class="inventory">
         <div>
           <h2><%= inventory.name %></h2>
           <%= button_to "Remove", inventory, method: :delete %>

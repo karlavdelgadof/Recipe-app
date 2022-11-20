@@ -6,7 +6,6 @@ class InventoryFoodsController < ApplicationController
     @inventory_food = InventoryFood.new
   end
 
-
   # POST /inventory_foods or /inventory_foods.json
   def create
     @inventory_food = InventoryFood.new(inventory_food_params)

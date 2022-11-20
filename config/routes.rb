@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :foods
   resources :public_recipes, only: [:index]
   resources :shopping_lists, only: [:index, :show]
+  get '/shopping_list?recipe_id=:recipe_id&&inventory_id=:inventory_id', to: 'shopping_lists#show', via: [:get, :post]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

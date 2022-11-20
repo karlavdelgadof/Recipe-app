@@ -94,9 +94,20 @@
       <%= form.submit %>
     </div>
   <% end %> 
+
+
+    <div>
+      <%= select_tag(:inventory_id, options_from_collection_for_select(@inventories, 'id', 'name'))%>
+    </div>
+  
+    <div>
+      <%= link_to "Generate", shopping_list_path(@recipe.id, params[:inventory_id]) %>
+    </div>
+
+  <div>
+    <%= link_to "Back to recipes", recipes_path %>
+    <%= button_to "Remove", @recipe, method: :delete %>
+  </div>
 </main>
 
-<div>
-  <%= link_to "Back to recipes", recipes_path %>
-  <%= button_to "Remove", @recipe, method: :delete %>
-</div>
+

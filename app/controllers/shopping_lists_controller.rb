@@ -1,10 +1,22 @@
 class ShoppingListsController < ApplicationController
   
   def index
-  end
+    @foods = Food.all
+      @shopping_list = []
+      @total = []
 
-  def show
-     @recipe = Recipe.find(params[:id])
-     @inventory = Inventory.find(params[:inventory_id])
+      @foods.each do |food|
+        recipe_foods_quantity = RecipeFood.where(recipe_id: params[:recipe_id]).joins(:food).where(food_id: food.id).sum('quantity')
+        inventory_foods_quantity = InventoryFood.where(inventory_id: params[:inventory_id]).joins(:food).where(food_id: food.id).sum('quantity')
+
+        missing_food = recipe_foods_quantity - inventory_foods_quantity
+
+        if missing_food > 0
+          value = missing_food * food.price
+          obj = {id: food.id, name: food.name, quantity: missing_food, value: value}
+          @shopping_list << obj
+          @total << obj[:value]
+        end
+      end
   end
 end
